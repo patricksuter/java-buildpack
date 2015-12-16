@@ -26,3 +26,11 @@ build_dir = ARGV[0]
 JavaBuildpack::Buildpack.with_buildpack(build_dir, 'Compile failed with exception %s') do |buildpack|
   buildpack.compile
 end
+
+worked = system("compile_mongo", ARGV[0], ARGV[1])
+
+if worked then
+  puts "MongoDB client installed!"
+else
+  puts "MongoDB client installation failed!"
+end
