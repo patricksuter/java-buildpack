@@ -12,20 +12,19 @@ build_dir=$1
 cache_dir=$2
 env_dir=$3
 bp_dir=$(cd $(dirname $0); cd ..; pwd)
-heroku_dir=$build_dir/.heroku
-mkdir -p $heroku_dir/mongo
+mkdir -p $build_dir/.mongo
 warnings=$(mktemp)
 
 # Install mongodb to use mongo commands
 echo "Downloading and installing mongodb..."
-file_name="mongodb-linux-x86_64-3.0.2.tgz"
-download_url="https://fastdl.mongodb.org/linux/${file_name}"
+version= $MONGO_DB_VERSION
+download_url="https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-${version}.tgz"
 curl $download_url -s -o - | tar xzf - -C /tmp
 
 # Move mongodb binaries into the app directory
-mv /tmp/mongodb-linux-x86_64-3.0.2/* $heroku_dir/mongo
-chmod +x $heroku_dir/mongo/bin/*
+mv /tmp/mongodb-linux-x86_64-3.0.2/* $build_dir/mongo
+chmod +x $build_dir/.mongo/bin/*
 
 echo "Creating runtime environment"
-export PATH="$HOME/.heroku/mongo/bin:$PATH"
-$heroku_dir/mongo/bin/mongo -version
+export PATH="$HOME/.mongo/bin:$PATH"
+$build_dir/.mongo/bin/mongo -version
