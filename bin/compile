@@ -27,8 +27,12 @@ JavaBuildpack::Buildpack.with_buildpack(build_dir, 'Compile failed with exceptio
   buildpack.compile
 end
 
-worked = system("compile_mongo", ARGV[0], ARGV[1])
+arg0 = ARGV[0]
+arg1 = ARGV[1]
 
+output = `compile_mongo #{arg0} #{arg1}`
+print output
+worked = $?.success?
 if worked then
   puts "MongoDB client installed!"
 else
