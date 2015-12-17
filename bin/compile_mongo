@@ -25,6 +25,4 @@ curl $download_url -s -o - | tar xzf - -C /tmp
 mv /tmp/mongodb-linux-x86_64-${version}/* $build_dir/.mongo
 chmod +x $build_dir/.mongo/bin/*
 
-echo "Creating runtime environment"
-export PATH="$HOME/.mongo/bin:$PATH"
 $build_dir/.mongo/bin/mongo -version

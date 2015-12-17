@@ -29,10 +29,7 @@ end
 
 arg0 = ARGV[0]
 arg1 = ARGV[1]
-
 currentDir = File.dirname(__FILE__)
-print "current directory: #{currentDir}"
-
 output = `#{currentDir}/compile_mongo #{arg0} #{arg1}`
 print output
 worked = $?.success?
@@ -40,4 +37,5 @@ if worked then
   puts "MongoDB client installed!"
 else
   puts "MongoDB client installation failed!"
+  exit 1
 end
