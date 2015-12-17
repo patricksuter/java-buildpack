@@ -30,7 +30,10 @@ end
 arg0 = ARGV[0]
 arg1 = ARGV[1]
 
-output = `compile_mongo #{arg0} #{arg1}`
+currentDir = File.dirname(__FILE__)
+print "current directory: #{currentDir}"
+
+output = `#{currentDir}/compile_mongo #{arg0} #{arg1}`
 print output
 worked = $?.success?
 if worked then
